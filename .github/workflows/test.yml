@@ -17,14 +17,12 @@
 name: Test
 
 on:
-  push:
-    paths-ignore:
-    - "**.md"
-    - "docs/**"
   pull_request:
+    branches:
+      - main
     paths-ignore:
-    - "**.md"
-    - "docs/**"
+      - "**.md"
+      - "docs/**"
 
 jobs:
   unit:
@@ -34,10 +32,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.3.0
 
       - name: Setup Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v3.5.0
         with:
           go-version-file: go.mod
           cache: true
