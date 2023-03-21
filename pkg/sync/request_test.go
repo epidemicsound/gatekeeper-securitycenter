@@ -100,6 +100,7 @@ func TestClient_createFindingRequest(t *testing.T) {
 				Parent: "organizations/123/sources/456",
 				// FindingId: "d0cbf936dbd346c0b7a772eac241cbb",
 				Finding: &securitycenterpb.Finding{
+					Description:  "violationMessage",
 					ResourceName: "https://apiserver:443/resourceSelfLink",
 					State:        securitycenterpb.Finding_ACTIVE,
 					Category:     "constraintKind",

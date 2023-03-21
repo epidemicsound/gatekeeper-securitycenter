@@ -31,7 +31,7 @@ import (
 
 const scannerName = "GATEKEEPER"
 
-var policyRegex = regexp.MustCompile(`^(P\d{4}):`)
+var policyRegex = regexp.MustCompile(`^(P\d{4}):\s+(.*)$`)
 
 // Resource holds the resource-related values used to create a finding request
 type Resource struct {
@@ -99,6 +99,7 @@ func (c *Client) createFindingRequest(constraint *Constraint, resource *Resource
 		Parent:    c.source,
 		FindingId: ID,
 		Finding: &securitycenter.Finding{
+			Description:  resource.Message,
 			State:        securitycenter.Finding_ACTIVE,
 			ResourceName: resourceName,
 			Category:     constraint.Kind,
