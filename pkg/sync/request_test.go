@@ -15,9 +15,10 @@
 package sync
 
 import (
-	"github.com/go-logr/logr/testr"
 	"testing"
 	"time"
+
+	"github.com/go-logr/logr/testr"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -90,6 +91,7 @@ func TestClient_createFindingRequest(t *testing.T) {
 				SelfLink:       "/resourceSelfLink",
 				UID:            "resourceUID",
 				ProjectID:      "resourceProjectID",
+				Severity:       "medium",
 				StatusSelfLink: "", // empty for non-KCC resources
 				Message:        "violationMessage",
 				SpecJSON:       "resourceSpecJSON",
@@ -103,6 +105,7 @@ func TestClient_createFindingRequest(t *testing.T) {
 					Category:     "constraintKind",
 					ExternalUri:  "https://apiserver:443/constraintSelfLink",
 					EventTime:    nowpb,
+					Severity:     securitycenterpb.Finding_MEDIUM,
 					SourceProperties: map[string]*structpb.Value{
 						"Cluster":                    structpb.NewStringValue("my-cluster"),
 						"ConstraintName":             structpb.NewStringValue("constraintName"),
@@ -111,6 +114,7 @@ func TestClient_createFindingRequest(t *testing.T) {
 						"ConstraintTemplateUID":      structpb.NewStringValue("constraintTemplateUID"),
 						"ConstraintUID":              structpb.NewStringValue("constraintUID"),
 						"Explanation":                structpb.NewStringValue("violationMessage"),
+						"PolicyID":                   structpb.NewStringValue(""),
 						"ProjectId":                  structpb.NewStringValue("resourceProjectID"),
 						"ResourceAPIGroup":           structpb.NewStringValue("resourceGVKGroup"),
 						"ResourceAPIVersion":         structpb.NewStringValue("resourceGVKVersion"),
