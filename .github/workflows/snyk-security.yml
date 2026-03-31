@@ -24,13 +24,6 @@ jobs:
             
       - name: Setup Snyk
         uses: snyk/actions/setup@master
-
-      - name: Add Snyk scan results to Snyk dashboard
-        run: snyk monitor -d --all-projects
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ steps.secrets.outputs.token }}
-
       - name: Run Snyk to check for vulnerabilities
         run: snyk test --severity-threshold=critical -d --all-projects
         env:
